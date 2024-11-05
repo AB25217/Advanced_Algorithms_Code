@@ -1,8 +1,7 @@
 from Func_CW.generate_random_graph import generate_random_graph # FROM THE COURSEWORK GIVEN LIBRARY
 import random
 import time  # Importing the time module to measure execution time
-from Func_CW.dijkstra import dijkstra
-
+from task2a import find_shortest_path
 class GenerateGraph:
     def __init__(self):  # Constructor to initialize the graph
         self.graph = None  # Represents the graph 
@@ -40,9 +39,9 @@ class GenerateGraph:
     def measure_execution_time(self, n, edge_prob, by_list, directed, weighted, min_weight, max_weight):  # Measure execution time
         self.graph = self.graph_generator(n, edge_prob, by_list, directed, weighted, min_weight, max_weight)  # Generate the graph
         start_time = time.time()  # Start timing
-        dijkstra_result = dijkstra(self.graph, 0)  # Execute Dijkstra's algorithm with the starting vertex as 0
+        results_2a = find_shortest_path(self.graph, 0)  # Execute Dijkstra's algorithm with the starting vertex as 0
         execution_time = time.time() - start_time  # Calculate execution time
-        return execution_time  # Return the execution time
+        return execution_time, results_2a  # Return the execution time
 
 # Testing 
 if __name__ == '__main__': 

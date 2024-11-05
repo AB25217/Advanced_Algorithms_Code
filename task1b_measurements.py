@@ -1,5 +1,5 @@
-from Task_1a import find_shortest_path
-from task_1b import GenerateGraph
+from task1a import find_shortest_path
+from task1b import GenerateGraph
 import time
 import random
 
