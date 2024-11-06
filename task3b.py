@@ -19,7 +19,6 @@ for index, row in journeys.iterrows(): # Iterates over panda datagram
     
     station_1 = stations.index(row["Station 1"])
     station_2 = stations.index(row["Station 2"])
-    time = row["Time"]
 
     # Since some journeys exists on multiple line we check for existing edge before adding 
     if not adjGraph.has_edge(station_1, station_2): 
