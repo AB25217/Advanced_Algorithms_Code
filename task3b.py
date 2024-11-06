@@ -45,7 +45,7 @@ for x in range(len(stations)):
 
 print(stations_to_path(longest_journey["path"], stations))
 
-plt.hist(stop_count, bins=range(1, max(stop_count) + 1))
+plt.hist(stop_count, bins=range(1, max(stop_count) + 1), edgecolor = "black")
 plt.title("Histogram of journeys")
 plt.xlabel("Number of stops")
 plt.ylabel("Number of journeys")
