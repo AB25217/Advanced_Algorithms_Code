@@ -1,53 +1,104 @@
-import pandas as pd 
+import pandas as pd
+import matplotlib.pyplot as plt
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
 from task1a import find_shortest_path, stations_to_path
-import matplotlib.pyplot as plt
-  
-df = pd.read_excel("London_Underground_data.xlsx",
-                   header=None, 
-                   names=["Line", "Station 1", "Station 2", "Time"]) 
 
-stations = df[df["Station 2"].isnull()] # Gets cells where third column is null
-stations = list(stations["Station 1"].unique()) # Creates list of unique stations
+class LondonUndergroundStopsHistogram:
+    """
+    Class to analyze London Underground journeys in terms of stops. Loads data from
+    an Excel file, builds an adjacency graph, calculates journey distances by stop count,
+    finds the longest journey, and plots a histogram of journey lengths in stops.
+    """
 
-journeys = df[df["Station 2"].notnull()] # Gets cells where third column is not null
-journeys = journeys[["Station 1", "Station 2", "Time"]] # Panda datagram with three columns
+    def __init__(self, file_path):
+        """
+        Initializes placeholders for stations, journeys, graph, stops, and the longest journey.
+        """
+        self.file_path = file_path
+        self.stations = []
+        self.journeys = pd.DataFrame()
+        self.adjGraph = None
+        self.stop_counts = []
+        self.longest_journey = {"start": "", "end": "", "path": "", "stops": 0}
 
-adjGraph = AdjacencyListGraph(len(journeys.index), directed=False, weighted=True)
+    def load_data(self):
+        """
+        Loads data from the Excel file and separates unique stations and journeys.
+        """
+        df = pd.read_excel(self.file_path, header=None, names=["Line", "Station 1", "Station 2"])
+        self.stations = list(df[df["Station 2"].isnull()]["Station 1"].unique())
+        self.journeys = df[df["Station 2"].notnull()][["Station 1", "Station 2"]]
 
-for index, row in journeys.iterrows(): # Iterates over panda datagram
-    
-    station_1 = stations.index(row["Station 1"])
-    station_2 = stations.index(row["Station 2"])
 
-    # Since some journeys exists on multiple line we check for existing edge before adding 
-    if not adjGraph.has_edge(station_1, station_2): 
-        adjGraph.insert_edge(station_1, station_2, 1) # change time to 1 to signify 1 stop
-    else:
-        old_edge = adjGraph.find_edge(station_1, station_2)
-        old_edge.set_weight(1)
+    def create_graph(self):
+        """
+        Creates an adjacency graph with edge weights of 1 to represent a single stop between stations.
+        """
+        self.adjGraph = AdjacencyListGraph(len(self.stations), directed=False, weighted=True)
 
-stop_count = []
-longest_journey = {"start": "", "end": "", "path": "", "stops": 0}
+        for index, row in self.journeys.iterrows():
+            station_1 = self.stations.index(row["Station 1"])
+            station_2 = self.stations.index(row["Station 2"])
 
-'''
-Loop runs over every element in the stations list creating unique journey pairs.
-Starting with x + 1 in the inner loop ensure we don't have repeated or reversed pairs
-so journeys are unqiue
-'''
+            # Set edge weight to 1 to count each connection as one stop
+            if not self.adjGraph.has_edge(station_1, station_2):
+                self.adjGraph.insert_edge(station_1, station_2, 1)
+            else:
+                # Ensure weight remains 1 for stop-counting consistency
+                old_edge = self.adjGraph.find_edge(station_1, station_2)
+                old_edge.set_weight(1)
 
-for x in range(len(stations)):
-    for y in range(x + 1, len(stations)):
-        stops, path = find_shortest_path(adjGraph, x, y)
-        stop_count.append(stops)
-        if stops > longest_journey["stops"]:
-            longest_journey = {"start": x, "end": y, "path": path, "stops": stops}
+    def calculate_stop_counts(self):
+        """
+        Calculates the shortest path by stop count between all unique station pairs.
+        Updates the longest journey if a journey exceeds the current longest stop count.
+        """
+        for x in range(len(self.stations)):
+            for y in range(x + 1, len(self.stations)):
+                stops, path = find_shortest_path(self.adjGraph, x, y)
+                self.stop_counts.append(stops)
 
-print(stations_to_path(longest_journey["path"], stations))
+                # Update longest journey if the current stop count is greater
+                if stops > self.longest_journey["stops"]:
+                    self.longest_journey = {"start": x, "end": y, "path": path, "stops": stops}
 
-plt.hist(stop_count, bins=range(1, max(stop_count) + 1), edgecolor = "black")
-plt.title("Histogram of journeys")
-plt.xlabel("Number of stops")
-plt.ylabel("Number of journeys")
-plt.show() 
+    def display_longest_journey(self):
+        """
+        Displays details of the longest journey found, including start, end, and stop count.
+        """
+        start = self.stations[self.longest_journey["start"]]
+        end = self.stations[self.longest_journey["end"]]
+        path = self.longest_journey["path"]
+        stops = self.longest_journey["stops"]
+
+        print("Total journeys calculated:", len(self.stop_counts))
+        print(f"The longest journey is from {start} to {end} with {stops} stops.")
+        print("Path:", stations_to_path(path, self.stations))
+
+    def plot_histogram(self):
+        """
+        Plots a histogram of journey lengths by the number of stops.
+        """
+        plt.hist(self.stop_counts, bins=range(1, max(self.stop_counts) + 1), edgecolor="black")
+        plt.title("Histogram of journeys based on number of stops")
+        plt.xlabel("Number of stops")
+        plt.ylabel("Number of journeys")
+        plt.show()
+
+    def create_histogram(self):
+        """
+        Executes all methods: loads data, creates the graph, calculates stop counts,
+        displays the longest journey, and plots the histogram.
+        """
+        self.load_data()
+        self.create_graph()
+        self.calculate_stop_counts()
+        self.display_longest_journey()
+        self.plot_histogram()
+
+
+if __name__ == "__main__":
+    graph = LondonUndergroundStopsHistogram("London_Underground_data.xlsx")
+    graph.create_histogram()
+
 
