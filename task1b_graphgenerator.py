@@ -18,7 +18,7 @@ class GenerateGraph:
         min_weight(int): What is the minimum weight of the graph, if any
         max_weight(int): What is the maximum weight for an edge, if any
         """
-
+        
         #parameters validation check
         if (weighted == True) and (min_weight > max_weight):
             raise ValueError("min_weight cannot be larger than max_weight")
@@ -39,6 +39,6 @@ class GenerateGraph:
 #testing 
 if __name__ == '__main__':
     generate_graph = GenerateGraph()
-    generated_graph = generate_graph.graph_generator(random.randint(0, 20), 0.15,True, False, True, 2, 15)
+    generated_graph = generate_graph.graph_generator(random.randint(0, 20), 0.50,True, False, True, 2, 15)
     print(generated_graph.get_card_E())
     print(generated_graph.get_edge_list())

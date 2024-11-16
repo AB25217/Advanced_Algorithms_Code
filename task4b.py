@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
-from task1a import find_shortest_path, _stations_to_path  # Using functions from Task 1a
+from task1a import find_shortest_path_task1, _stations_to_path  # Using functions from Task 1a
 from task4a import Graph_From_CSV, ClosedRoutes  # Using classes from Task 4a
 
 
@@ -19,7 +19,7 @@ def create_histogram_and_longest_path(graph, stations):
     # Compute the shortest paths between all pairs of stations
     for x in range(len(stations)):
         for y in range(x + 1, len(stations)):
-            d, path = find_shortest_path(graph, x, y)
+            d, path = find_shortest_path_task1(graph, x, y)
             distances.append(d)
             # Update longest journey if this path is longer
             if d > longest_journey["distance"]:

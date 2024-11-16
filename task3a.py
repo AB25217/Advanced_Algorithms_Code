@@ -10,7 +10,7 @@ Histogram for London Underground journeys
 import pandas as pd
 import matplotlib.pyplot as plt
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
-from task1a import find_shortest_path
+from task1a import find_shortest_path_task1
 
 class London_Underground_Histogram:
     """
@@ -65,7 +65,7 @@ class London_Underground_Histogram:
         """
         for x in range(len(self.stations)):
             for y in range(x + 1, len(self.stations)):
-                d, path = find_shortest_path(self.adjGraph, x, y)
+                d, path = find_shortest_path_task1(self.adjGraph, x, y)
                 self.distances.append(d)
                 
                 # Update longest journey if the current distance is greater

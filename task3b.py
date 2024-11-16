@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
-from task1a import find_shortest_path
+from task1a import find_shortest_path_task1
 
 class LondonUndergroundStopsHistogram:
     """
@@ -55,7 +55,7 @@ class LondonUndergroundStopsHistogram:
         """
         for x in range(len(self.stations)):
             for y in range(x + 1, len(self.stations)):
-                stops, path = find_shortest_path(self.adjGraph, x, y)
+                stops, path = find_shortest_path_task1(self.adjGraph, x, y)
                 self.stop_counts.append(stops)
 
                 # Update longest journey if the current stop count is greater
