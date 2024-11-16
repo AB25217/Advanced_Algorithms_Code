@@ -25,7 +25,7 @@ class LondonUndergroundStopsHistogram:
         """
         Loads data from the Excel file and separates unique stations and journeys.
         """
-        df = pd.read_excel(self.file_path, header=None, names=["Line", "Station 1", "Station 2"])
+        df = pd.read_excel(self.file_path, header=None, names=["Line", "Station 1", "Station 2", "Time"])
         self.stations = list(df[df["Station 2"].isnull()]["Station 1"].unique())
         self.journeys = df[df["Station 2"].notnull()][["Station 1", "Station 2"]]
 
