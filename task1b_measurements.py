@@ -1,5 +1,5 @@
 from task1a import find_shortest_path
-from task1b import GenerateGraph
+from task1b_graphgenerator import GenerateGraph
 import time
 import random
 
@@ -8,7 +8,7 @@ if __name__ == '__main__':
     n = 100  # initial number of vertices
 
     while n <= 1000:
-        generated_graph = graph_generator.generate_graph(n, 0.15, True, False, True, 2, 15)
+        generated_graph = graph_generator.graph_generator(n, 0.15, True, False, True, 2, 15)
         results = [n]  # index 0 represents the vertices n for the graph; rest represent the result
         execution_times = [n]  # index 0 represents the vertices n for the graph; rest represent the execution times
 

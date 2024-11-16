@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
-from task1a import find_shortest_path, stations_to_path  # Using functions from Task 1a
+from task1a import find_shortest_path, _stations_to_path  # Using functions from Task 1a
 from task4a import Graph_From_CSV, ClosedRoutes  # Using classes from Task 4a
 
 
@@ -12,7 +12,6 @@ def create_histogram_and_longest_path(graph, stations):
     dijkstra on the already reduced network, stores these journeys in a list and creates a histogram.
     The function finds the longest path by updating everytime a longer journey is found and displays the start
     station, end station, the whole path and the duration in minutes.
-
     """
     distances = []
     longest_journey = {"start": "", "end": "", "path": "", "distance": 0}
@@ -28,7 +27,7 @@ def create_histogram_and_longest_path(graph, stations):
 
     # Display the longest path in the reduced network
     print("Longest journey in reduced network:")
-    print(stations_to_path(longest_journey["path"], stations))
+    print(_stations_to_path(longest_journey["path"], stations))
     print("Duration:", longest_journey["distance"], "minutes")
 
     # Plot the histogram of journey durations
@@ -41,7 +40,7 @@ def create_histogram_and_longest_path(graph, stations):
 
 if __name__ == "__main__":
     # Creating the initial graph from the provided Excel file
-    graph_data = Graph_From_CSV(r'C:\Users\mateo\PycharmProjects\algorithms cw\London Underground data(2).xlsx')
+    graph_data = Graph_From_CSV('London Underground data.xlsx')
     graph_data.create_graph()
 
     # Identifying routes to close using Task 4a's method

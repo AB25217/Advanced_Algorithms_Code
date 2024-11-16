@@ -1,8 +1,6 @@
 # adjacency lists for graphs
 # written algorithm for creating the graph 
 # then writing the algorithm
-
-
 #imports 
 from Func_CW.adjacency_list_graph import AdjacencyListGraph# data structure for storing the graph
 from Func_CW.mst import kruskal
@@ -69,7 +67,7 @@ class ClosedRoutes:
         Desc: Responsible for searching whether closure of routes is feasible
 
         Parameters: graph(adjacency list or matrix))
-                    station_list(list), a list containing all of the station names which are also indexed
+                    station_list(list), a list containing all of the station names which are also indexed. Not mandatory unless user wants stations to be named
 
         """
         self.graph = graph # the graph of the underground
@@ -99,7 +97,7 @@ class ClosedRoutes:
 
         mst = kruskal(self.graph) # minimal spanning tree
 
-        mst_edges.update(mst.get_edge_list())
+        mst_edges.update(mst.get_edge_list()) 
         all_edges -= mst_edges
 
         if named_list == True:
@@ -134,7 +132,7 @@ class ClosedRoutes:
 
 
 if __name__ == "__main__":
-    graph = Graph_From_CSV(r'E:\University Work\Year_2\AdvancedAlgorithms\Coursework\London Underground data(2).xlsx')
+    graph = Graph_From_CSV('London Underground data.xlsx')
     graph.create_graph()
     closed_stations = ClosedRoutes(graph.graph, graph.station_list)
     closed_stations_set, lines_named =closed_stations.find_what_routes_to_close(True)

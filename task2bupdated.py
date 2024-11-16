@@ -39,7 +39,7 @@ class GenerateGraph:
     def measure_execution_time(self, n, edge_prob, by_list, directed, weighted, min_weight, max_weight):  # Measure execution time
         self.graph = self.graph_generator(n, edge_prob, by_list, directed, weighted, min_weight, max_weight)  # Generate the graph
         start_time = time.time()  # Start timing
-        results_2a = find_shortest_path(self.graph, 0)  # Execute Dijkstra's algorithm with the starting vertex as 0
+        results_2a = find_shortest_path(self.graph, 0)  
         execution_time = time.time() - start_time  # Calculate execution time
         return execution_time, results_2a  # Return the execution time
 

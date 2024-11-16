@@ -36,8 +36,6 @@ adjGraph.insert_edge(8, 1, weight=2)
 adjGraph.insert_edge(8, 9, weight=2)
 adjGraph.insert_edge(9, 1, weight=2)
 
-
-
 def find_shortest_path(graph, start, end):
     """
     Function to find shortest path between two stations in a graph based on their edges weights
@@ -93,5 +91,13 @@ if __name__ == "__main__":
     start = 0  # Victoria station
     end = 6    # Charing Cross Station
     path, d = find_shortest_path(adjGraph, start, end)  # path and distance
+    print(type(d))
     path_str = _stations_to_path(path, stations_1)  # get the formatted path as a string
+    print(f"{stations_1[end]}: Distance = {d}, Path = {path_str}") # prints the distance and the path to the chosen stations 
+
+    #testing from charing cross station to victoria station
+    start = 6 
+    end = 0
+    path, d = find_shortest_path(adjGraph, start, end)
+    path_str = _stations_to_path(path, stations_1)
     print(f"{stations_1[end]}: Distance = {d}, Path = {path_str}") # prints the distance and the path to the chosen stations 
