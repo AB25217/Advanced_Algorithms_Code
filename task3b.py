@@ -98,7 +98,6 @@ class LondonUndergroundStopsHistogram:
 
 
 if __name__ == "__main__":
-    graph = LondonUndergroundStopsHistogram("London Underground data(2).xlsx")
+    graph = LondonUndergroundStopsHistogram("London_Underground_data.xlsx")
     graph.create_histogram()
-
 
