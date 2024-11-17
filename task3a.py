@@ -65,7 +65,7 @@ class London_Underground_Histogram:
         """
         for x in range(len(self.stations)):
             for y in range(x + 1, len(self.stations)):
-                d, path = find_shortest_path_task1(self.adjGraph, x, y)
+                path, d = find_shortest_path_task1(self.adjGraph, x, y)
                 self.distances.append(d)
                 
                 # Update longest journey if the current distance is greater
