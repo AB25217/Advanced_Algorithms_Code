@@ -108,6 +108,6 @@ class London_Underground_Histogram:
 
 
 if __name__ == "__main__":
-    graph = London_Underground_Histogram("London Underground data.xlsx")
+    graph = London_Underground_Histogram("London Underground data OG.xlsx")
     graph.create_histogram()
 
