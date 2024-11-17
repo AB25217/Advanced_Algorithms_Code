@@ -66,7 +66,7 @@ def find_shortest_path_task1(graph, start, end):
     path.reverse() # reverse the arr, as the structure is supposed to be from the start of the station to the end
     return path, distance 
 
-def _stations_to_path(path, stations):
+def stations_to_path(path, stations):
       """
       Function for converting a list of station indices (path) to their respective station names, returning a string with arrows.
 
@@ -91,12 +91,12 @@ if __name__ == "__main__":
     end = 6  # Charing Cross Station
     path, d = find_shortest_path_task1(adjGraph, start, end)  # path and distance
     print(type(d))
-    path_str = _stations_to_path(path, stations_1)  # get the formatted path as a string
+    path_str = stations_to_path(path, stations_1)  # get the formatted path as a string
     print(f"{stations_1[end]}: Distance = {d}, Path = {path_str}") # prints the distance and the path to the chosen stations 
 
     #testing from charing cross station to victoria station
     start = 6 
     end = 0
     path, d = find_shortest_path_task1(adjGraph, start, end)
-    path_str = _stations_to_path(path, stations_1)
+    path_str = stations_to_path(path, stations_1)
     print(f"{stations_1[end]}: Distance = {d}, Path = {path_str}") # prints the distance and the path to the chosen stations 
