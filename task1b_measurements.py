@@ -29,7 +29,7 @@ def measure_algorithm_time(start_vertices, end_vertices,increments,measurements_
     n = start_vertices # sets n as start_vertices for data manipulation
     execution_times = [] # stores all execution times for all graph sizes n
     while n <= end_vertices: # while the specified start(or n ) is not above the specified limitm
-        generated_graph = graph_generator.graph_generator(n, 0.25, True, False, True, 2, 15)
+        generated_graph = graph_generator.graph_generator(n, 0.15, True, False, True, 2, 15)
         execution_time = [n, generated_graph.get_card_E()]  # index 0 represents the vertices n for the graph; 1 represents number of edges, rest represent the execution times
 
         for _ in range(measurements_for_graph_size):  # run 10 times
