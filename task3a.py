@@ -108,7 +108,6 @@ class London_Underground_Histogram:
         self.display_longest_journey()
         self.plot_histogram()
 
-
 if __name__ == "__main__":
     graph = London_Underground_Histogram("London Underground data OG.xlsx")
     graph.create_histogram()
