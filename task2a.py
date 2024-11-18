@@ -93,8 +93,6 @@ def stations_to_path(path, stations):
     return " -> ".join(path_str)
 
 
-
-
 if __name__ == "__main__":
     # display index of stations from 0 - 9
     print("Available stations:")

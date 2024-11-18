@@ -3,7 +3,7 @@ import random
 import time  # Importing the time module to measure execution time
 import matplotlib.pyplot as plt  # Importing matplotlib for visualization
 from Func_CW.dijkstra import dijkstra
-from task2a import find_shortest_path
+from task1a import find_shortest_path_task1
 
 class GenerateGraph:
     def __init__(self):  # Constructor to initialize the graph
@@ -65,7 +65,7 @@ class GenerateGraph:
 
             "Measure execution time for Dijkstra's algorithm from source to destination"
             start_time = time.time()
-            find_shortest_path(self.graph, source, destination)  # Execute Dijkstra's algorithm starting from the source vertex
+            find_shortest_path_task1(self.graph, source, destination)  # Execute Dijkstra's algorithm starting from the source vertex
             execution_time = time.time() - start_time
             total_execution_time += execution_time
 
