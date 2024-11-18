@@ -1,6 +1,9 @@
 from Func_CW.adjacency_list_graph import AdjacencyListGraph
 from Func_CW.dijkstra import dijkstra
 
+#@title 2a
+
+
 #0 = Victoria
 #1 = Green Park
 #2 = St James Park
@@ -63,7 +66,7 @@ def find_shortest_path(graph, start, end):
   current = end # the preedeccessor of end station
 
   path = []  # the path between start and end
-  
+
 
   while current != None:
     path.append(current)
@@ -73,7 +76,7 @@ def find_shortest_path(graph, start, end):
   stops  = len(path) - 1 # calculate the number of stops as the length of the path minus one
   return stops, path
 
-  
+
 
 def stations_to_path(path, stations):
     """
@@ -89,7 +92,7 @@ def stations_to_path(path, stations):
     #path_str list where station names are mapped with predecessor indices
     path_str = [stations[i] for i in path]
 
-    # Join station names with arrows
+    # output the stations join with arrows
     return " -> ".join(path_str)
 
 
